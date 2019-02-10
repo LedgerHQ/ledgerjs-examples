@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "name": "basic-electron-hid",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "postinstall": "electron-rebuild"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^4.0.3",
+    "electron-rebuild": "^1.8.4"
+  },
+  "dependencies": {
+    "@ledgerhq/hw-app-btc": "^4.38.6",
+    "@ledgerhq/hw-transport-node-hid": "^4.38.6",
+    "babel-polyfill": "^6.26.0"
+  }
+}
