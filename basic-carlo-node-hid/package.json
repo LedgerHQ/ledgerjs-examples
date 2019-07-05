@@ -10,12 +10,12 @@
     "start": "yarn dev & node main.js"
   },
   "dependencies": {
-    "@ledgerhq/hw-app-btc": "^4.38.6",
-    "@ledgerhq/hw-transport-node-hid": "^4.43.0",
+    "@ledgerhq/hw-app-btc": "^4.64.0",
+    "@ledgerhq/hw-transport-node-hid": "^4.64.0",
     "babel-polyfill": "^6.26.0",
-    "carlo": "^0.9.43"
+    "carlo": "^0.9.46"
   },
   "devDependencies": {
-    "parcel": "^1.11.0"
+    "parcel": "^1.12.3"
   }
 }

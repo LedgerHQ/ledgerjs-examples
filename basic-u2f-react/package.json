@@ -6,18 +6,18 @@
     "build": "cross-env NODE_ENV=production parcel build index.html --no-minify --public-url /"
   },
   "dependencies": {
-    "@ledgerhq/hw-app-btc": "^4.38.6",
-    "@ledgerhq/hw-app-eth": "^4.38.6",
-    "@ledgerhq/hw-transport-u2f": "^4.38.6",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "@ledgerhq/hw-app-btc": "^4.63.2",
+    "@ledgerhq/hw-app-eth": "^4.63.2",
+    "@ledgerhq/hw-transport-u2f": "^4.63.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-react-app": "^3.1.1",
+    "babel-preset-react-app": "^9.0.0",
     "cross-env": "^5.2.0",
-    "parcel-bundler": "^1.6.2"
+    "parcel-bundler": "^1.12.3"
   },
   "private": true,
   "version": "4.36.0"

@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import eip55 from "eip55";
 import TransportWebBLE from "@ledgerhq/hw-transport-web-ble";
 import TransportWebUSB from "@ledgerhq/hw-transport-webusb";
-import { logsObservable } from "@ledgerhq/hw-transport-web-ble/lib/debug";
 import AppEth from "@ledgerhq/hw-app-eth";
 import QRCode from "./QRCode";
 import "./App.css";
-
-logsObservable.subscribe(e => console.log(e.type + ": " + e.message));
 
 const delay = ms => new Promise(success => setTimeout(success, ms));
 
