@@ -12,24 +12,24 @@ class App extends Component {
   };
   onGetLedgerBitcoinAddress = async () => {
     try {
-      this.setState({ error: null });
+      this.setState(state => ({ ...state, error: null }));
       const transport = await TransportU2F.create();
       const btc = new Btc(transport);
       const { bitcoinAddress } = await btc.getWalletPublicKey("44'/0'/0'/0");
-      this.setState({ address: bitcoinAddress });
+      this.setState(state => ({ ...state, address: bitcoinAddress }));
     } catch (error) {
-      this.setState({ error });
+      this.setState(state => ({ ...state, error }));
     }
   };
   onGetLedgerEthereumAddress = async () => {
     try {
-      this.setState({ error: null });
+      this.setState(state => ({ ...state, error: null }));
       const transport = await TransportU2F.create();
       const eth = new Eth(transport);
       const { address } = await eth.getAddress("44'/60'/0'/0'/0");
-      this.setState({ address });
+      this.setState(state => ({ ...state, address }));
     } catch (error) {
-      this.setState({ error });
+      this.setState(state => ({ ...state, error }));
     }
   };
   render() {
