@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "basic-carlo-node-hid",
+  "version": "1.0.0",
+  "description": "A minimal Carlo application",
+  "main": "main.js",
+  "scripts": {
+    "build": "parcel build src/index.html -d dist",
+    "dev": "parcel watch src/index.html -d dist",
+    "start": "yarn dev & node main.js"
+  },
+  "dependencies": {
+    "@ledgerhq/hw-app-btc": "^4.64.0",
+    "@ledgerhq/hw-transport-node-hid": "^4.64.0",
+    "babel-polyfill": "^6.26.0",
+    "carlo": "^0.9.46"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.3"
+  }
+}
