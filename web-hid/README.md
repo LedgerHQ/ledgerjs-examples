@@ -24,6 +24,6 @@ You will also see any lint errors in the console.
 
 ### `yarn build` or `npm run build`
 
-Builds the app for production to the `dist` folder.\
+Builds the app for production to the `dist` folder.
 
 Your app is ready to be deployed!
