@@ -1,0 +1,22 @@
+{
+  "name": "tuto-developper-portal",
+  "version": "1.0.0",
+  "description": "",
+  "source": "src/index.html",
+  "dependencies": {
+    "@ledgerhq/hw-app-btc": "^6.12.1",
+    "@ledgerhq/hw-transport-webhid": "^6.11.2",
+    "@ledgerhq/hw-transport-webusb": "^6.11.2",
+    "@ledgerhq/logs": "^6.10.0",
+    "babel-polyfill": "^6.26.0",
+    "parcel": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build",
+    "start": "parcel"
+  },
+  "author": "",
+  "license": "ISC"
+}

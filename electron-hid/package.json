@@ -1,0 +1,23 @@
+{
+  "name": "electron-hid",
+  "version": "1.0.0",
+  "description": "electron hid",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "postinstall": "electron-rebuild --force"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^15.3.1",
+    "electron-rebuild": "^3.2.5"
+  },
+  "dependencies": {
+    "@ledgerhq/hw-app-btc": "^6.15.0",
+    "@ledgerhq/hw-transport-node-hid": "^6.11.2",
+    "@ledgerhq/logs": "^6.10.0",
+    "babel-polyfill": "^6.26.0",
+    "browserify": "^17.0.0"
+  }
+}
