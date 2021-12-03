@@ -1,57 +1,67 @@
 import { ethers } from "ethers";
-import { LedgerSigner } from "@ethersproject/hardware-wallets";
 import TransportWebHID from "@ledgerhq/hw-transport-webhid";
 import Eth from "@ledgerhq/hw-app-eth";
 
-document.getElementById("tx-transfer").onclick = async function () {
-    //https://ropsten.etherscan.io/getRawTx?tx=0x7049bacc4313e56a8211bab47dd477dfc42ca026904bc7c3cb5b7a73ed47006e
-    const provider = new ethers.providers.JsonRpcProvider("https://ropsten.infura.io/v3/120a32364030465aa9208b058d0a3df8");
+const provider = new ethers.providers.JsonRpcProvider("https://ropsten.infura.io/v3/120a32364030465aa9208b058d0a3df8");
 
-    // const signer = new LedgerSigner(provider);
+
+const chainId = 3;
+let gasPrice;
+let addressWallet;
+let recipient = "0x920f19c7F7Ce5b3170AdB94fDcC4570Da95D286b";
+let value = 0.1;
+let gasLimit = 100000;
+let nonce;
+let _eth;
+
+document.getElementById("connect-ledger").onclick = async function () {
 
     const transport = await TransportWebHID.create();
-    const eth = new Eth(transport);
-    const { address } = await eth.getAddress("44'/60'/0'/0/0", false);
+    _eth = new Eth(transport);
+    const { address } = await _eth.getAddress("44'/60'/0'/0/0", false);
 
+    addressWallet = address;
+    gasPrice = (await provider.getGasPrice())._hex;
 
+    document.getElementById("wallet").value = address;
+    document.getElementById("gasPrice").value = parseInt(gasPrice,16) + " wei";
+    document.getElementById("chainId").value = chainId;
+    document.getElementById("value").value = value;
+    document.getElementById("recipient").value = recipient;
+    document.getElementById("gasLimit").value = gasLimit;
+}
 
-    const gasPrice = (await provider.getGasPrice())._hex;
-    const recipient = "0x920f19c7F7Ce5b3170AdB94fDcC4570Da95D286b";
-    const nonce = await provider.getTransactionCount(address, "latest");
-    const value =  ethers.utils.parseUnits("1", "ether")._hex;
-    const gas = provider.getFeeData();
-    const gasLimit = ethers.utils.hexlify(100000);
+document.getElementById("tx-transfer").onclick = async function () {
+    addressWallet = document.getElementById("wallet").value;
+    recipient =  document.getElementById("recipient").value;
+    value =  document.getElementById("value").value;
+    gasLimit =  parseInt(document.getElementById("gasLimit").value);
+    nonce =  await provider.getTransactionCount(addressWallet, "latest");
 
-    const tx = {
+    const transaction = {
         to: recipient,
-        value: value,
         gasPrice: gasPrice,
-        gasLimit: gasLimit,
+        gasLimit: ethers.utils.hexlify(gasLimit),
         nonce: nonce,
+        chainId: chainId,
         data: null,
-        chainId:3,
+        value: ethers.utils.parseUnits(value, "ether")._hex,
     }
 
-    console.log(tx);
+    let unsignedTx = ethers.utils.serializeTransaction(transaction).substring(2);
 
-    // const transaction =  await signer.sendTransaction(tx);
-    // console.log(transaction);
-
-    let unsignedTx = ethers.utils.serializeTransaction(tx).substring(2);
-
-    console.log(unsignedTx);
-
-    const signature = await eth.signTransaction("44'/60'/0'/0/0",unsignedTx);
-    console.log(signature);
+    const signature = await _eth.signTransaction("44'/60'/0'/0/0",unsignedTx);
 
 
     signature.r = "0x"+signature.r;
     signature.s = "0x"+signature.s;
     signature.v = parseInt(signature.v);
-    signature.from = address;
+    signature.from = addressWallet;
 
-    let signedTx = ethers.utils.serializeTransaction(tx, signature);
+    let signedTx = ethers.utils.serializeTransaction(transaction, signature);
 
-    await provider.sendTransaction(signedTx);
+    const hash = (await provider.sendTransaction(signedTx)).hash;
+    const url = "https://ropsten.etherscan.io/tx/" + hash;
 
+    document.getElementById("url").value = url;
 }
