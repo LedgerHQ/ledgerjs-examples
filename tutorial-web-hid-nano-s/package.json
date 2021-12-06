@@ -1,0 +1,23 @@
+{
+  "name": "tutorial-web-hid-nano-s",
+  "version": "1.0.0",
+  "description": "",
+  "source": "index.html",
+  "scripts": {
+    "start": "parcel"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.0.1"
+  },
+  "dependencies": {
+    "@ethereumjs/tx": "^3.4.0",
+    "@ethersproject/hardware-wallets": "^5.5.0",
+    "@ledgerhq/hw-app-eth": "^6.17.0",
+    "@ledgerhq/hw-transport-webhid": "^6.11.2",
+    "eip55": "^2.1.0",
+    "ethers": "^5.5.1",
+    "web3": "^1.6.1"
+  }
+}
