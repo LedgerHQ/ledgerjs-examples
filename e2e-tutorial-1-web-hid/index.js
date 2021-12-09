@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import TransportWebHID from "@ledgerhq/hw-transport-webhid";
 import Eth from "@ledgerhq/hw-app-eth";
 
-const provider = new ethers.providers.JsonRpcProvider("https://ropsten.infura.io/v3/120a32364030465aa9208b058d0a3df8");
+const provider = new ethers.providers.JsonRpcProvider("https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161");
 
 
 const chainId = 3;
@@ -10,7 +10,7 @@ let gasPrice;
 let addressWallet;
 let recipient = "0x920f19c7F7Ce5b3170AdB94fDcC4570Da95D286b";
 let value = 0.1;
-let gasLimit = 100000;
+let gasLimit = 1000000;
 let nonce;
 let _eth;
 
@@ -22,9 +22,10 @@ document.getElementById("connect-ledger").onclick = async function () {
 
     addressWallet = address;
     gasPrice = (await provider.getGasPrice())._hex;
+    gasPrice = parseInt(gasPrice,16) * 1.15;
 
     document.getElementById("wallet").value = address;
-    document.getElementById("gasPrice").value = parseInt(gasPrice,16) + " wei";
+    document.getElementById("gasPrice").value = parseInt(gasPrice) + " wei";
     document.getElementById("chainId").value = chainId;
     document.getElementById("value").value = value;
     document.getElementById("recipient").value = recipient;
@@ -40,14 +41,13 @@ document.getElementById("tx-transfer").onclick = async function () {
 
     const transaction = {
         to: recipient,
-        gasPrice: gasPrice,
+        gasPrice: "0x" + parseInt(gasPrice).toString(16),
         gasLimit: ethers.utils.hexlify(gasLimit),
         nonce: nonce,
         chainId: chainId,
         data: null,
         value: ethers.utils.parseUnits(value, "ether")._hex,
     }
-
     let unsignedTx = ethers.utils.serializeTransaction(transaction).substring(2);
 
     const signature = await _eth.signTransaction("44'/60'/0'/0/0",unsignedTx);
@@ -55,13 +55,12 @@ document.getElementById("tx-transfer").onclick = async function () {
 
     signature.r = "0x"+signature.r;
     signature.s = "0x"+signature.s;
-    signature.v = parseInt(signature.v);
+    signature.v = parseInt(signature.v)-1;
     signature.from = addressWallet;
 
     let signedTx = ethers.utils.serializeTransaction(transaction, signature);
 
     const hash = (await provider.sendTransaction(signedTx)).hash;
     const url = "https://ropsten.etherscan.io/tx/" + hash;
-
-    document.getElementById("url").value = url;
+    document.getElementById("url").innerHTML = url;
 }
