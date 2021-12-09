@@ -45,7 +45,7 @@ document.getElementById("tx-transfer").onclick = async function () {
         gasLimit: ethers.utils.hexlify(gasLimit),
         nonce: nonce,
         chainId: chainId,
-        data: null,
+        data: "0x00",
         value: ethers.utils.parseUnits(value, "ether")._hex,
     }
     let unsignedTx = ethers.utils.serializeTransaction(transaction).substring(2);
@@ -55,7 +55,7 @@ document.getElementById("tx-transfer").onclick = async function () {
 
     signature.r = "0x"+signature.r;
     signature.s = "0x"+signature.s;
-    signature.v = parseInt(signature.v)-1;
+    signature.v = parseInt(signature.v);
     signature.from = addressWallet;
 
     let signedTx = ethers.utils.serializeTransaction(transaction, signature);
