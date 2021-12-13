@@ -17,7 +17,7 @@
     background-color: #F7F9FD;
 }
 
-.url{
+#url,.url{
     text-align: center;
     margin-top: 160px;
     color: green;
