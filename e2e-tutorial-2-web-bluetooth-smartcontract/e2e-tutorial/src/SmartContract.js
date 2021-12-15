@@ -56,9 +56,7 @@ function SmartContract({eth,address}) {
     const hash = (await provider.sendTransaction(signedTx)).hash;
     console.log(hash);
     setUrl("https://ropsten.etherscan.io/tx/" + hash);
-    // const tx = await simpleStorage.updateData(data);
-    // await tx.wait();
-    // console.log(tx);
+
     const newData = await simpleStorage.readData();
     setData(newData);
   };
