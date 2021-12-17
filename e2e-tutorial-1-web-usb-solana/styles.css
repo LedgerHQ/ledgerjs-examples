@@ -1,0 +1,24 @@
+.modal-content{
+    width: 300px;
+    height: 400px;
+}
+
+#connect-ledger{
+    width: 16rem;
+    height: 7rem;
+    background-color: white;
+    border: none;
+}
+#connect-ledger:hover{
+    background-color: #EDEFF3;
+}
+
+.modal-body{
+    background-color: #F7F9FD;
+}
+
+#url,.url{
+    text-align: center;
+    margin-top: 160px;
+    color: green;
+}
