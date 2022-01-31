@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import eip55 from "eip55";
 import TransportWebBLE from "@ledgerhq/hw-transport-web-ble";
 import AppEth from "@ledgerhq/hw-app-eth";
 import QRCode from "./QRCode";
@@ -53,8 +52,7 @@ class ShowAddressScreen extends Component {
     try {
       const eth = new AppEth(transport);
       const path = "44'/60'/0'/0/0"; // HD derivation path
-      const r = await eth.getAddress(path, verify);
-      const address = eip55.encode(r.address);
+      const { address } = await eth.getAddress(path, verify);
       if (this.unmounted) return;
       this.setState({ address });
     } catch (error) {
